@@ -1,0 +1,26 @@
+USE [bd]
+GO
+
+/****** Object:  Table [dbo].[Tarefa]    Script Date: 15/05/2020 22:31:27 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Tarefa](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Titulo] [varchar](50) NOT NULL,
+	[Status] [int] NOT NULL,
+	[Descricao] [varchar](255) NULL,
+	[DataCriacao] [datetime] NOT NULL,
+	[DataEdicao] [datetime] NULL,
+	[DataExclusao] [datetime] NULL,
+	[DataConclusao] [datetime] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
