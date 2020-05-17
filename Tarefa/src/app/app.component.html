@@ -1,0 +1,60 @@
+<form #tarefaForm="ngForm">
+  <div class="col-sm-9" style="text-align: center;">
+    <h3>{{title}}</h3>
+  </div>
+  <div class="col-md-9" style="top: 30px;">
+    <div class="form-group row">
+      <label class="col-sm-1 col-form-label">Titulo:</label>
+      <div class="col-sm-7">
+        <input [(ngModel)]="tarefa.titulo" required name="titulo" #tarefatitulo="ngModel"
+          [ngClass]="{'is-invalid':tarefatitulo.invalid}" class="form-control">
+        <div class="invalid-feedback">
+          <span>Titulo é Obrigatorio</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-7" style="top: 10px;">
+    <div class="form-group">
+      <label class="col-form-label">Descrição :</label>
+      <textarea [(ngModel)]="tarefa.descricao" name="descricao" class="form-control" rows="3"></textarea>
+    </div>
+  </div>
+  <div class="col-md-1" style="margin-top:10px;">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" [checked]="checked" name="status" (click)="Checked()">
+      <label class="form-check-label">
+        Concluido
+      </label>
+    </div>
+  </div>
+  <div>
+    <button [disabled]="tarefaForm.invalid" style="margin-top: 10px; margin-left:15px;" (click)="Save(tarefa)"
+      class="btn btn-primary mr-2">Salvar</button>
+    <button [disabled]="tarefaForm.invalid" style="margin-top: 10px; margin-left:15px;" (click)="Novo()"
+      class="btn btn-light">Novo</button>
+  </div>
+  <div class="col-sm-9" style="top: 35px;">
+    <table class="table table-responsive-sm">
+      <thead>
+        <tr>
+          <th>Titulo</th>
+          <th>Descrição</th>
+          <th>Status</th>
+          <th>Opções</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let lst of listaTarefas" draggable="true" (dragstart)="Editar(lst.id)">
+          <td>{{lst.titulo}}</td>
+          <td>{{lst.descricao}}</td>
+          <td> <label><img [title]="Opcao(lst.status)" [src]="Status(lst.status)" width="30" height="25"></label></td>
+          <td>
+            <button *ngIf="lst.status != 4" (click)="Editar(lst.id)" class="btn btn-warning mr-2">Editar</button>
+            <button (click)="Deletar(lst.id)"><img title="Excluir" [src]="excluir" width="30" height="25"></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</form>
